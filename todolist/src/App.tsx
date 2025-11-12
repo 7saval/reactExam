@@ -1,6 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ClassCom from './ClassCom';
+import FuncCom from './FuncCom';
+import TodoList from './Todolist';
+import Clock from './Timer';
 
 {/* 
   작성자 : kyj
@@ -25,28 +29,12 @@ function App() {
   return (
     // 최상위 부모 태그가 반드시 있어야 <></>
     <div className="container">
-      {/* 자바스크립트 코드는 {}안에서 표현 */}
-      <h1 style={style} className='test'>Hello, 
-        {
-          name === '리액트' ? (<h1>YES</h1>) : null
-        }!!</h1>
-      <p>반갑습니다</p>
-      {/* 반드시 태그 클로징 해야 */}
-      <br/>
-      {/* 주석문 작성 */}
+      {/* <ClassCom></ClassCom>
+      <FuncCom></FuncCom> */}
+      <TodoList></TodoList>
+      <Clock></Clock>
     </div>
   );
-  // const port = undefined;
-  // return (
-  //   <div>
-  //     {
-  //       port || '포트를 설정하지 않았습니다.'
-  //     }
-  //   </div>
-  // )
 }
-// function App() {
-//   return React.createElement("div", null, "Hello, 리액트!!"
-//   )
-// }
+
 export default App;
