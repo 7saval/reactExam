@@ -5,6 +5,7 @@ import ClassCom from './ClassCom';
 import FuncCom from './FuncCom';
 import TodoList from './Todolist';
 import Clock from './Timer';
+import MyWeather from './MyWeather';
 
 {/* 
   작성자 : kyj
@@ -32,7 +33,8 @@ function App() {
       {/* <ClassCom></ClassCom>
       <FuncCom></FuncCom> */}
       <TodoList></TodoList>
-      <Clock></Clock>
+      {/* <Clock></Clock> */}
+      <MyWeather weather='맑음'>일기예보</MyWeather>
     </div>
   );
 }

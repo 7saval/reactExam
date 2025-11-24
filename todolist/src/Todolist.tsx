@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import TodoModal from "./TodoModal";
 
 // 사용자정의 타입 지정
 type Todo = {
@@ -56,7 +57,11 @@ const TodoList : React.FC = () => {
     }
 
     // 상세정보 창 닫기
-    const handleCloseDetail = (todo : Todo) => {
+    // const handleCloseDetail = (todo : Todo) => {
+    //     setShowDetail(false);
+    // }
+
+    const handleCloseDetail = () => {
         setShowDetail(false);
     }
 
@@ -69,7 +74,7 @@ const TodoList : React.FC = () => {
                     <input type="text" 
                         placeholder="할일 입력"
                         style={{marginRight : '10px', writingMode : 'horizontal-tb'}}
-                        value={newTodo} // 입력부 비워주기 위해 작성
+                        // value={newTodo} // 입력부 비워주기 위해 작성
                         onChange={(e)=>setNewTodo(e.target.value)}  // newTodo 데이터에 담기
                     />
                     <Button variant="warning" onClick={addTodo}>추가</Button>
@@ -105,6 +110,9 @@ const TodoList : React.FC = () => {
                     </ul>
                 </div>
             </div>
+            <TodoModal show={showDetail} 
+                        todo={selectedTodo} 
+                        handleClose={handleCloseDetail} />
         </div>
     )
 }
