@@ -1,11 +1,6 @@
 import { styled } from "styled-components";
 import logo from "../../assets/images/logo192.png";
 import { FaSignInAlt, FaRegUser } from "react-icons/fa";
-// import * as FaIcons from "react-icons/fa";
-
-// const FaSignInAlt = FaIcons.FaSignInAlt;
-// const FaRegUser = FaIcons.FaRegUser;
-
 
 const CATEGORY = [
     {
@@ -50,13 +45,13 @@ function Header(){
                 <ul>
                     <li>
                         <a href="/login">
-                           {/* <FaSignInAlt />  */}
+                           <FaSignInAlt /> 
                            로그인
                         </a>
                     </li>
                     <li>
                         <a href="/signup">
-                            {/* <FaRegUser /> */}
+                            <FaRegUser />
                             회원가입
                         </a>
                     </li>
