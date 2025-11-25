@@ -23,7 +23,7 @@ export const state = {
 
 }
 
-// context는 일종의 레퍼런스 : 
+// context는 일종의 Wrapper : 
 // provider 하위의 컴포넌트들이 이를 구독하고 언제든지 꺼내 쓸 수 있다.
 // 꺼내 쓰는 방법은 useContext 훅 이용
 export const ThemeContext = createContext<State>(state);
