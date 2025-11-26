@@ -1,41 +1,61 @@
 import { styled } from "styled-components";
 import logo from "../../assets/images/logo192.png";
 import { FaSignInAlt, FaRegUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { Category } from "../../models/category.model";
+import { useEffect, useState } from "react";
+import { fetchCategory } from "../../api/category.api";
+import { useCategory } from "../../hooks/useCategory";
 
-const CATEGORY = [
-    {
-        id: null,
-        name: "전체"
-    },
-    {
-        id: 0,
-        name: "동화"
-    },
-    {
-        id: 1,
-        name: "소설"
-    },
-    {
-        id: 2,
-        name: "사회"
-    },
-]
+// const CATEGORY = [
+//     {
+//         id: null,
+//         name: "전체"
+//     },
+//     {
+//         id: 0,
+//         name: "동화"
+//     },
+//     {
+//         id: 1,
+//         name: "소설"
+//     },
+//     {
+//         id: 2,
+//         name: "사회"
+//     },
+// ]
 
 function Header(){
+
+    // 커스텀 훅으로 빼주기
+    const { category } = useCategory();
+    // const [category, setCategory] = useState<Category[]>([]);
+
+    // // 첫 렌더링 시 카테고리 데이터 가져오기
+    // useEffect(() => {
+    //   fetchCategory().then((category) => {
+    //     setCategory(category);
+    //   });
+    // }, []);
+    
+
     return (
         <HeaderStyle>
             <h1 className="logo">
-                <img src={logo} alt="book store"/>
+                <Link to="/">
+                    <img src={logo} alt="book store"/>
+                </Link>
             </h1>
             {/* 카테고리 영역 */}
             <nav className="category">
                 <ul>
-                    {CATEGORY.map((item) => (
-                        <li key={item.id}>
-                            <a href={item.id === null ? `/books` : 
-                                `/books?category_id=${item.id}`}>
-                                {item.name}
-                            </a>
+                    {category.map((item) => (
+                        <li key={item.category_id}>
+                            <Link to={item.category_id === null ? `/books` : 
+                                `/books?category_id=${item.category_id}`}>
+                                {item.category_name}
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -44,16 +64,16 @@ function Header(){
             <nav className="auth">
                 <ul>
                     <li>
-                        <a href="/login">
-                           <FaSignInAlt /> 
+                        <Link to="/login">
+                           {/* <FaSignInAlt />  */}
                            로그인
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="/signup">
-                            <FaRegUser />
+                        <Link to="/signup">
+                            {/* <FaRegUser /> */}
                             회원가입
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </nav>
