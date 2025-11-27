@@ -5,25 +5,22 @@ import InputText from "../components/common/InputText";
 import Button from "../components/common/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { use, useState } from "react";
-import { signup } from "../api/auth.api";
+import { login, resetPassword, resetRequest, signup } from "../api/auth.api";
 import { useAlert } from "../hooks/useAlert";
+import { SignupStyle } from "./Signup";
+import { useAuthStore } from "../store/authStore";
 
 export interface SignupProps {
     email: string;
     password: string;
 }
 
-function Signup() {
+function Login() {
     const navigate = useNavigate();
     const showAlert = useAlert();
 
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-
-    // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault(); // form submit 시 action에 의해 페이지 이동 막음
-    //     console.log(email, password);
-    // }
+    // zustand 상태관리 모듈
+    const { isloggedIn, storeLogin, storeLogout } = useAuthStore();
 
     // react-hook-form 이용해 form 관리 
     const { register, 
@@ -32,20 +29,22 @@ function Signup() {
           } = useForm<SignupProps>();
 
     const onSubmit = (data: SignupProps) => {
-        signup(data).then((res) => {
+        login(data).then((res) => {
+            // 상태 변화
+            storeLogin(res.token);
+
             // 성공
-            // window.alert('회원가입이 완료되었습니다.');
-            showAlert('회원가입이 완료되었습니다.');
-            navigate('/login');
+            showAlert('로그인이 완료되었습니다.');
+            navigate('/');
         }).catch((err) => {
             // 실패
-            showAlert('회원가입에 실패했습니다.');
+            showAlert('로그인에 실패했습니다.');
         });
     }
 
   return (
     <>
-        <Title size="large">회원가입</Title>
+        <Title size="large">로그인</Title>
         <SignupStyle>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <fieldset>
@@ -59,8 +58,6 @@ function Signup() {
                 </fieldset>
                 <fieldset>
                     <InputText  placeholder="비밀번호"
-                        // inputType="password" value={password}
-                        // onChange={(e) => setPassword(e.target.value)}
                         inputType="password" 
                         {...register("password", {required: true})}    // "필드명", 필수 여부
                     />
@@ -68,7 +65,7 @@ function Signup() {
                 </fieldset>
                 <fieldset>
                     <Button type="submit" size="large" scheme="primary">
-                        회원가입
+                        로그인
                     </Button>
                 </fieldset>
                 <div className="info">
@@ -81,30 +78,4 @@ function Signup() {
   );
 }
 
-export const SignupStyle = styled.div`
-    max-width: ${({theme}) => theme.layout.width.small};
-    margin: 80px auto;
-
-    fieldset {
-        border: 0;
-        padding: 0 0 8px 0;
-        .error-text {
-            color: red;
-        }
-    }
-
-    input {
-        width: 100%;
-    }
-
-    button {
-        width: 100%;
-    }
-
-    .info {
-        text-align: center;
-        padding: 16px 0 0 0;
-    }
-`;
-
-export default Signup;
+export default Login;

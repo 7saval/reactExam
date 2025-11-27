@@ -10,6 +10,9 @@ import { BookStoreThemeProvider, ThemeContext } from './context/ThemeContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Error from './components/common/Error';
 import Signup from './pages/Signup';
+import ResetPassword from './pages/ResetPassword';
+import Login from './pages/Login';
+import Books from './pages/Books';
 
 // 라우터 생성 : 라우터의 세부 내용, 경로 지정
 const router = createBrowserRouter([
@@ -24,13 +27,25 @@ const router = createBrowserRouter([
   {
       path: '/books',
       element: <Layout>
-                  <div>도서 목록</div>
+                  <Books />
                </Layout>,
   },
   {
       path: '/signup',
       element: <Layout>
                   <Signup />
+               </Layout>,
+  },
+  {
+      path: '/reset',
+      element: <Layout>
+                  <ResetPassword />
+               </Layout>,
+  },
+  {
+      path: '/login',
+      element: <Layout>
+                  <Login />
                </Layout>,
   },
 ]);
