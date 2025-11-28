@@ -10,12 +10,12 @@ import { useEffect } from "react";
 const viewOptions = [
   {
     value: "list",
-    // icon: <FaList/>,
+    icon: <FaList/>,
     label: "리스트",
   },
   {
     value: "grid",
-    // icon: <FaTh/>,
+    icon: <FaTh/>,
     label: "그리드",
   },
 ]
@@ -46,8 +46,7 @@ function BooksViewSwitcher() {
           <Button key={item.value} size="medium" 
             onClick={() => handleSwitch(item.value as ViewMode)}
             scheme={ searchParams.get(QUERYSTRING.VIEW) === item.value ? "primary" : "normal"}>
-            {item.label}
-            {/* {item.icon} */}
+            {item.icon}
           </Button>
         ))
       }

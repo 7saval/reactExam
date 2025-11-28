@@ -85,13 +85,13 @@ function Header(){
                     <ul>
                         <li>
                             <Link to="/login">
-                            {/* <FaSignInAlt />  */}
+                            <FaSignInAlt /> 
                             로그인
                             </Link>
                         </li>
                         <li>
                             <Link to="/signup">
-                                {/* <FaRegUser /> */}
+                                <FaRegUser />
                                 회원가입
                             </Link>
                         </li>

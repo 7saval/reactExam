@@ -13,7 +13,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
             "Content-Type": "application/json",
             Authorization: getToken() ? getToken() : "",
         },
-        withCredentials: true,
+        withCredentials: false,
         ...config,
     });
 

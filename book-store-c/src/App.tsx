@@ -13,6 +13,7 @@ import Signup from './pages/Signup';
 import ResetPassword from './pages/ResetPassword';
 import Login from './pages/Login';
 import Books from './pages/Books';
+import BookDetail from './pages/BookDetail';
 
 // 라우터 생성 : 라우터의 세부 내용, 경로 지정
 const router = createBrowserRouter([
@@ -46,6 +47,12 @@ const router = createBrowserRouter([
       path: '/login',
       element: <Layout>
                   <Login />
+               </Layout>,
+  },
+  {
+      path: '/book/:bookId',
+      element: <Layout>
+                  <BookDetail />
                </Layout>,
   },
 ]);

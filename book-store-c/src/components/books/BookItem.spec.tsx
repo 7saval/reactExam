@@ -16,7 +16,7 @@ const dumyBook = {
     contents: "목차입니다.",
     price: 20000,
     likes: 3,
-    pubDate: "2025-10-01",
+    pub_date: "2025-10-01",
 };
 
 describe("BookItem", () => {

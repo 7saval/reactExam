@@ -23,8 +23,6 @@ export const useBooks = () => {
         const news = params.get(QUERYSTRING.NEWS);
         const page = params.get(QUERYSTRING.PAGE);
 
-        console.log("useBooks: fetching with params ->", { category_id, news, page });
-
         fetchBooks({
             category_id: category_id ? Number(category_id) : undefined,
             news: news ? true : undefined,

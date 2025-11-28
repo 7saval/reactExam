@@ -5,7 +5,7 @@ export type ColorKey = 'primary' | 'background' | 'secondary' | 'third' |
 // 타이틀, 버튼 사이즈 타입
 export type HeadingSize = "large" | "medium" | "small";
 export type ButtonSize = "large" | "medium" | "small";
-export type ButtonScheme = "primary" | "normal";
+export type ButtonScheme = "primary" | "normal" | "like" ;
 export type LayoutWidth = "large" | "medium" | "small";
 
 // 테마도 타입으로 관리
@@ -92,6 +92,10 @@ export const light: Theme = {
         normal: {
             color: 'black',
             backgroundColor: 'lightgray',
+        },
+        like: {
+            color: 'white',
+            backgroundColor: 'coral',
         }
     },
     borderRadius: {

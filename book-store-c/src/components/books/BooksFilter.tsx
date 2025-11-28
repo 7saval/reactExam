@@ -11,7 +11,7 @@ function BooksFilter() {
     // 2. 신간 여부 true, false
     // 쿼리스트링 이용하기 : 상태 공유 가능, 재사용성, 검색엔진 최적화, 데이터 추적 분석에 용이
 
-    const { category} = useCategory();
+    const { category } = useCategory();
     const [searchParams, setSearchParams] = useSearchParams();
 
     const handleCategory = (id: number | null) => {
@@ -19,7 +19,6 @@ function BooksFilter() {
 
         console.log(newSearchParams);
         console.log(id);
-        console.log("BooksFilter: handleCategory -> before setSearchParams", id, newSearchParams.toString());
         if(id === null){
             newSearchParams.delete(QUERYSTRING.CATEGORY_ID);
         } else {
@@ -42,7 +41,6 @@ function BooksFilter() {
             newSearchParams.set(QUERYSTRING.NEWS, "true");
         }
 
-        console.log("BooksFilter: handeleNews -> before setSearchParams", newSearchParams.toString());
         setSearchParams(newSearchParams); // 실제 업데이트
     }
 
