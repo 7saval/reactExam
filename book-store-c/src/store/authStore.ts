@@ -10,6 +10,7 @@ interface StoreState {
 // 토큰 가져오기
 export const getToken = () => {
     const token = localStorage.getItem("token");
+    console.log(token);
     return token;
 };
 

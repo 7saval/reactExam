@@ -17,7 +17,7 @@ export interface SignupProps {
 
 function Login() {
     const navigate = useNavigate();
-    const showAlert = useAlert();
+    const {showAlert} = useAlert();
 
     // zustand 상태관리 모듈
     const { isloggedIn, storeLogin, storeLogout } = useAuthStore();

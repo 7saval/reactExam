@@ -14,7 +14,7 @@ interface Props {
 
 function AddToCart({book}: Props) {
     const [quantity, setQuantity] = useState<number>(1);
-    const showAlert = useAlert();
+    const {showAlert} = useAlert();
     // const [cartAdded, setCartAdded] = useState(false);
     const { addToCart, cartAdded } = useBook(book.id.toString());
 
