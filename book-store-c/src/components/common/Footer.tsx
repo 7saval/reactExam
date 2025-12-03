@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import logo from "../../assets/images/logo192.png";
+import logo from "../../assets/images/bookStore logo.png";
 
 function Footer(){
     return(

@@ -1,13 +1,10 @@
 import { useForm } from "react-hook-form";
-import styled from "styled-components";
 import Title from "../components/common/Title";
 import InputText from "../components/common/InputText";
 import Button from "../components/common/Button";
-import { Link, useNavigate } from "react-router-dom";
-import { use, useState } from "react";
-import { resetPassword, resetRequest, signup } from "../api/auth.api";
-import { useAlert } from "../hooks/useAlert";
+import { Link } from "react-router-dom";
 import { SignupStyle } from "./Signup";
+import { useAuth } from "@/hooks/useAuth";
 
 export interface SignupProps {
     email: string;
@@ -15,11 +12,15 @@ export interface SignupProps {
 }
 
 function ResetPassword() {
-    const navigate = useNavigate();
-    const {showAlert} = useAlert();
+    // const navigate = useNavigate();
+    // const {showAlert} = useAlert();
 
-    // 리셋 요청 여부
-    const [resetRequested, setResetRequested] = useState(false);
+    // // 리셋 요청 여부
+    // const [resetRequested, setResetRequested] = useState(false);
+
+    const { userResetPassword, 
+            userResetRequest, 
+            resetRequested } = useAuth();
 
     // react-hook-form 이용해 form 관리 
     const { register, 
@@ -28,26 +29,15 @@ function ResetPassword() {
           } = useForm<SignupProps>();
 
     const onSubmit = (data: SignupProps) => {
-        if(resetRequested){
-            // 초기화
-            resetPassword(data).then(() => {
-                // 성공
-                showAlert('비밀번호 초기화되었습니다.');
-                navigate('/login');
-            }).catch((err) => {
-                // 실패
-                showAlert('비밀번호 초기화에 실패했습니다.');
-            })
-        } else {
-            // 초기화 요청
-            resetRequest(data).then(() => {
-                // 성공
-                setResetRequested(true);
-            }).catch((err) => {
-                // 실패
-                showAlert('비밀번호 초기화 요청에 실패했습니다.');
-            })
-        }
+        // if(resetRequested){
+        //     // 초기화
+        //     userResetPassword(data);
+        // } else {
+        //     // 초기화 요청
+        //     userResetRequest(data);
+        // }
+        resetRequested ? userResetPassword(data) :
+        userResetRequest(data);
     }
 
   return (

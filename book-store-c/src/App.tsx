@@ -17,66 +17,65 @@ import BookDetail from './pages/BookDetail';
 import Cart from './pages/Cart';
 import Order from './pages/Order';
 import OrderList from './pages/OrderList';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './api/queryClient';
+import ToastContainer from './components/common/toast/ToastContainer';
 
-// 라우터 생성 : 라우터의 세부 내용, 경로 지정
-const router = createBrowserRouter([
+const routeList = [
   {
     path: '/',
-    element: <Layout>
-                <Home />
-             </Layout>,
-    // errorElement: <div>페이지를 찾을 수 없습니다.</div>,
-    errorElement: <Error />,
+    element: <Home />,
   },
   {
       path: '/books',
-      element: <Layout>
-                  <Books />
-               </Layout>,
+      element: <Books />
+               
   },
   {
       path: '/signup',
-      element: <Layout>
-                  <Signup />
-               </Layout>,
+      element: <Signup />
+               
   },
   {
       path: '/reset',
-      element: <Layout>
-                  <ResetPassword />
-               </Layout>,
+      element: <ResetPassword />
+               
   },
   {
       path: '/login',
-      element: <Layout>
-                  <Login />
-               </Layout>,
+      element: <Login />
+               
   },
   {
       path: '/book/:bookId',
-      element: <Layout>
-                  <BookDetail />
-               </Layout>,
+      element: <BookDetail />
+               
   },
   {
       path: '/cart',
-      element: <Layout>
-                  <Cart />
-               </Layout>,
+      element: <Cart />
+               
   },
   {
       path: '/order',
-      element: <Layout>
-                  <Order />
-               </Layout>,
+      element: <Order />
+               
   },
   {
       path: '/orderlist',
-      element: <Layout>
-                  <OrderList />
-               </Layout>,
+      element: <OrderList />
+               
   },
-]);
+];
+
+// 라우터 생성 : 라우터의 세부 내용, 경로 지정
+const router = createBrowserRouter(routeList.map((item) => {
+  return {
+    ...item,
+    element: <Layout>{item.element}</Layout>,
+    errorElement: <Error />,
+  }
+}));
 
 
 function App() {
@@ -86,10 +85,13 @@ function App() {
   // const {themeName, setThemeName} = useContext(ThemeContext);
   
   return (
-    <BookStoreThemeProvider>
-      {/* <ThemeSwitcher /> */}
-        <RouterProvider router={router} />
-    </BookStoreThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <BookStoreThemeProvider>
+        {/* <ThemeSwitcher /> */}
+          <RouterProvider router={router} />
+          <ToastContainer />
+      </BookStoreThemeProvider>
+    </QueryClientProvider>
   )
 }
 

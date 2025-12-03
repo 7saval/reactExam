@@ -33,7 +33,7 @@ describe("BookItem", () => {
         expect(getByText("20,000원")).toBeInTheDocument();
         expect(getByText(dumyBook.likes)).toBeInTheDocument();
         expect(getByAltText(dumyBook.title)).toHaveAttribute("src", 
-            `https://picsum.photos/id/${dumyBook.img}/info/600/600`
+            `https://picsum.photos/id/${dumyBook.img}/600/600`
         );
     });
 })

@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
-import { BookDetail } from "../models/book.model";
+import { use, useEffect, useState } from "react";
+import { BookDetail, BookReviewItem, BookReviewItemWrite } from "../models/book.model";
 import { fetchBook, likeBook, unlikeBook } from "../api/books.api";
-import { set } from "react-hook-form";
 import { useAuthStore } from "../store/authStore";
 import { useAlert } from "./useAlert";
 import { addCart } from "../api/carts.api";
+import { addBookReview, fetchBookReview } from "@/api/review.api";
+import { useToast } from "./useToast";
 
 export const useBook = (bookId:string | undefined) => {
     const [book, setBook] = useState<BookDetail | null>(null);
     const [cartAdded, setCartAdded] = useState(false);
+    const [reviews, setReviews] = useState<BookReviewItem[]>([]);
     const { isloggedIn }= useAuthStore();
     const {showAlert} = useAlert();
+    const { showToast } = useToast();
 
     // 좋아요 토글 버튼
     const likeToggle = () => {
@@ -31,6 +34,7 @@ export const useBook = (bookId:string | undefined) => {
                 liked: false,
                 likes: book.likes - 1
             });
+            showToast('좋아요가 최소되었습니다.');
         })
       } else {
         // unlike => like
@@ -41,7 +45,7 @@ export const useBook = (bookId:string | undefined) => {
                 liked: true,
                 likes: book.likes + 1
             });
-        
+            showToast('좋아요가 성공했습니다.');
         }).catch((err) => {
             // 실패 처리
             console.log(err.response?.data);
@@ -72,7 +76,25 @@ export const useBook = (bookId:string | undefined) => {
       fetchBook(bookId).then((book)=> {
         setBook(book);
       })
+
+      // 리뷰 내용
+      fetchBookReview(bookId).then((reviews) => {
+        setReviews(reviews);
+      })
     }, [bookId])
+
+    const addReview = (reviewData:BookReviewItemWrite) => {
+        if(!book) return;
+
+        addBookReview(book.id.toString(), reviewData).then((res) => {
+            fetchBookReview(book.id.toString()).then((reviews) => {
+                setReviews(reviews);
+            });
+            showAlert(res?.message);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
     
-    return {book, likeToggle, addToCart, cartAdded}; 
+    return {book, likeToggle, addToCart, cartAdded, reviews, addReview}; 
 }

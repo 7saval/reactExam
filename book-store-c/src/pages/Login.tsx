@@ -9,37 +9,28 @@ import { login, resetPassword, resetRequest, signup } from "../api/auth.api";
 import { useAlert } from "../hooks/useAlert";
 import { SignupStyle } from "./Signup";
 import { useAuthStore } from "../store/authStore";
+import { useAuth } from "@/hooks/useAuth";
 
-export interface SignupProps {
+export interface LoginProps {
     email: string;
     password: string;
 }
 
 function Login() {
-    const navigate = useNavigate();
-    const {showAlert} = useAlert();
-
+    // const navigate = useNavigate();
+    // const {showAlert} = useAlert();
+    const { userLogin } = useAuth();
     // zustand 상태관리 모듈
-    const { isloggedIn, storeLogin, storeLogout } = useAuthStore();
+    // const { isloggedIn, storeLogin, storeLogout } = useAuthStore();
 
     // react-hook-form 이용해 form 관리 
     const { register, 
             handleSubmit, 
             formState: { errors}
-          } = useForm<SignupProps>();
+          } = useForm<LoginProps>();
 
-    const onSubmit = (data: SignupProps) => {
-        login(data).then((res) => {
-            // 상태 변화
-            storeLogin(res.token);
-
-            // 성공
-            showAlert('로그인이 완료되었습니다.');
-            navigate('/');
-        }).catch((err) => {
-            // 실패
-            showAlert('로그인에 실패했습니다.');
-        });
+    const onSubmit = (data: LoginProps) => {
+        userLogin(data);
     }
 
   return (
