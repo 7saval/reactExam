@@ -39,5 +39,10 @@ const FooterStyle = styled.footer`
         }
     }
 
+    @media screen AND ${({theme}) => theme.mediaQuery.mobile} {
+        flex-direction: column;
+        align-items: center;
+    }
+
 `;
 export default Footer;

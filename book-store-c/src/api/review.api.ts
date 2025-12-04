@@ -13,3 +13,7 @@ interface AddBookReviewResponse {
 export const addBookReview = async (bookId:string, reviewData:BookReviewItemWrite) => {
     return await requestHandler<AddBookReviewResponse>("post", `/reviews/${bookId}`);
 }
+
+export const fetchReviewAll = async () => {
+    return await requestHandler<BookReviewItem>("get", `/reviews`);
+}

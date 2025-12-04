@@ -30,6 +30,7 @@ function Tabs({children}: TabsProps) {
             {tabs.map((tab, index) => (
                 <button 
                     key={index} 
+                    type="button"
                     onClick={() => setActiveIndex(index)}
                     className={index === activeIndex ? "active" : ""}
                     {...tab.props}

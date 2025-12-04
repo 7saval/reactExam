@@ -91,18 +91,39 @@ const AddToCartStyle = styled.div<AddToCartStyleProps>`
     position: relative;
 
     .added {
+        /* 기본: 컴포넌트 바로 위에 툴팁 형태로 표시해서 아래 요소(예: 탭)와 겹치지 않게 함 */
         position: absolute;
         right: 0;
-        bottom: -90px;
+        bottom: calc(100% + 8px);
         background: ${({theme}) => theme.color.background};
         border-radius: ${({theme}) => theme.borderRadius.default};
         padding: 8px 12px;
         opacity: ${({$added}) => $added ? 1 : 0};
-        transition: all 0.5s ease;   /* 애니메이션 효과 */
+        transform: translateY(${({$added}) => $added ? '0' : '6px'});
+        pointer-events: ${({$added}) => $added ? 'auto' : 'none'};
+        z-index: 10;
+        transition: opacity 0.28s ease, transform 0.28s ease;   /* 부드러운 페이드+슬라이드 */
 
         p {
             padding: 0 0 8px 0;
             margin: 0;
+        }
+    }
+
+    /* 모바일: 레이아웃 흐름 안에 넣어 다른 요소를 밀어내므로 겹침이 발생하지 않음 */
+    @media screen AND ${({theme}) => theme.mediaQuery.mobile} {
+        display: flex;
+        flex-direction: column;
+
+        .added {
+            position: static;
+            right: auto;
+            bottom: auto;
+            margin-top: 8px;
+            transform: none;
+            opacity: ${({$added}) => $added ? 1 : 0};
+            pointer-events: ${({$added}) => $added ? 'auto' : 'none'};
+            transition: opacity 0.2s ease;
         }
     }
 `;

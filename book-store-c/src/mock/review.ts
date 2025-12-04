@@ -50,3 +50,11 @@ export const addReview = http.post('http://localhost:9999/reviews/:bookId',
         })
     }
 )
+
+export const reviewFormain = http.get('http://localhost:9999/reviews', 
+    () => {
+    
+    return HttpResponse.json(mockReviewsData, {
+        status: 200
+    })
+});

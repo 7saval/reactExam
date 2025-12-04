@@ -13,6 +13,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/react-router-dom": "^5.3.3",
+    "@types/react-slick": "^0.23.13",
     "axios": "^1.13.2",
     "dayjs": "^1.11.19",
     "react": "^19.2.0",
@@ -21,7 +22,9 @@
     "react-icons": "^4.12.0",
     "react-router-dom": "^7.9.6",
     "react-scripts": "^5.0.1",
+    "react-slick": "^0.31.0",
     "sanitize.css": "^13.0.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.19",
     "web-vitals": "^2.1.4",
     "zustand": "^5.0.8"

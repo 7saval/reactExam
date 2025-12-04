@@ -44,6 +44,7 @@ function Login() {
                         // onChange={(e) => setEmail(e.target.value)}
                         inputType="email" 
                         {...register("email", {required: true})}    // "필드명", 필수 여부
+                        inputMode="email"
                     />
                     {errors.email && <p className="error-text">이메일을 입력해주세요.</p>}
                 </fieldset>
@@ -51,6 +52,7 @@ function Login() {
                     <InputText  placeholder="비밀번호"
                         inputType="password" 
                         {...register("password", {required: true})}    // "필드명", 필수 여부
+                        inputMode="text"
                     />
                     {errors.password && <p className="error-text">비밀번호를 입력해주세요.</p>}
                 </fieldset>

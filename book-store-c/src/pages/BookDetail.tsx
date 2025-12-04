@@ -165,6 +165,16 @@ const BookDetailStyle = styled.div`
         } */
         
     }
+
+    @media screen AND ${({theme}) => theme.mediaQuery.mobile} {
+        .header {
+            flex-direction: column;
+            align-items: center;
+            .img {
+                flex: 0;
+            }
+        }
+    }
 `;
 
 export default BookDetail;
